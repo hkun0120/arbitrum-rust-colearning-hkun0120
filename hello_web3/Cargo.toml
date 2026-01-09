@@ -1,0 +1,9 @@
+[package]
+name = "hello_web3"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ethers = "1.0.2"
+tokio = { version = "1", features = ["full"] }
+eyre = "0.6"

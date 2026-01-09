@@ -1,0 +1,35 @@
+# Rust 编译产物
+/target/
+**/*.rs.bk
+*.pdb
+
+# Cargo 锁文件（对于二进制项目通常应该提交，但可根据需要调整）
+# Cargo.lock
+
+# IDE 和编辑器文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 环境变量文件
+.env
+.env.local
+
+# 日志文件
+*.log
+
+# 测试覆盖率报告
+tarpaulin-report.html
+cobertura.xml
+
+# 临时文件
+*.tmp
+*.temp
+
