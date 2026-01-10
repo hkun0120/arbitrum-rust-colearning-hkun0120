@@ -14,6 +14,16 @@ async fn get_gas_price(
     Ok(gas_price)
 }
 
+async fn get_eth_price() -> Result<f64> {
+    let url = "https://api.coinbase.com/v2/exchange-rates?currency=ETH";
+    let rsp = reqwest::get(url).await?.json::<serde_json::Value>().await?;
+    let usd = rsp["data"]["rates"]["USD"]
+        .as_str()
+        .and_then(|s| s.parse::<f64>().ok())
+        .unwrap_or(0.0);
+    Ok(usd)
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     let provider = Provider::<Http>::try_from("https://sepolia-rollup.arbitrum.io/rpc")?;
@@ -29,5 +39,11 @@ async fn main() -> Result<()> {
     let gas_fee_ether = gas_fee.as_u128() as f64 / 1e18;
     println!("Gas fee in Gwei: {:?}", gas_fee_gwei);
     println!("Gas fee in Ether: {:?}", gas_fee_ether);
+    // 计算按照现在的ETH价格计算gas费，要实时获取ETH价格，最后换成美元和人民币，并且打印出来
+    let eth_price = get_eth_price().await?;
+    let gas_fee_usd = gas_fee_ether * eth_price;
+    let gas_fee_cny = gas_fee_usd * 7.2;
+    println!("Gas fee in USD: {:?}", gas_fee_usd);
+    println!("Gas fee in CNY: {:?}", gas_fee_cny);
     Ok(())
 }
