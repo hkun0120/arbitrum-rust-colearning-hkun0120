@@ -2,6 +2,7 @@
     // - 关键提示：
     //     1. Gas 费计算公式：Gas 费 = Gas 价格 × Gas 限额（基础转账 Gas 限额可参考行业通用值）；
     //     2. 需通过 ethers-rs 动态获取实时 Gas 价格，而非硬编码。
+    // ！注意这里算出来的gas费是L2的gas费，不是L1的gas费
 use ethers::prelude::*;
 use eyre::Result;
 use std::convert::TryFrom;
@@ -14,7 +15,7 @@ async fn get_gas_price(
     Ok(gas_price)
 }
 
-async fn get_eth_price() -> Result<f64> {
+pub async fn get_eth_price() -> Result<f64> {
     let url = "https://api.coinbase.com/v2/exchange-rates?currency=ETH";
     let rsp = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     let usd = rsp["data"]["rates"]["USD"]
