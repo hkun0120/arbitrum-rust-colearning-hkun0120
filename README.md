@@ -4,3 +4,5 @@
 
 作业2查询余额的截图：
 <img width="1144" height="364" alt="image" src="https://github.com/user-attachments/assets/b9754581-b782-4372-b9dd-e81a0b773b8d" />
+task4:
+收据：<img width="575" height="392" alt="截屏2026-01-11 23 59 32" src="https://github.com/user-attachments/assets/b3d937e3-5e70-49ea-9e18-1e678c65b0cf" />
